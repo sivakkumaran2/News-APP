@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Linking, Share, RefreshControl } from 'react-native';
-import { Avatar, Button, Card, Text, ActivityIndicator } from 'react-native-paper';
+import { View, Image, StyleSheet, ScrollView, Linking, Share, RefreshControl, ActivityIndicator } from 'react-native';
+import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 const NEWS_API_KEY = 'e4a6185b7ca64927b6fc35015024ef60';
-const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`;
+const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=${NEWS_API_KEY}`;
 
 export default function HomeScreen() {
   const [articles, setArticles] = useState([]);
@@ -52,7 +52,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>News Day</Text>
+        <Text style={styles.headerTitle}>Politics News</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -91,11 +91,10 @@ export default function HomeScreen() {
                   subtitleStyle={styles.cardSubtitle}
                 />
                 <Card.Content>
-                  <Text variant="titleLarge" style={styles.title}>{article.title}</Text>
-                  <Text variant="bodyMedium" style={styles.content}>{article.description}</Text>
+                  <Text style={styles.cardContent}>{article.description}</Text>
                 </Card.Content>
                 {article.urlToImage && (
-                  <Card.Cover source={{ uri: article.urlToImage }} style={styles.cover} />
+                  <Card.Cover source={{ uri: article.urlToImage }} style={styles.coverImage} />
                 )}
                 <Card.Actions>
                   <Button onPress={() => handleReadMore(article.url)} style={styles.actionButton}>Read More</Button>
@@ -114,11 +113,10 @@ export default function HomeScreen() {
                   subtitleStyle={styles.cardSubtitle}
                 />
                 <Card.Content>
-                  <Text variant="titleLarge" style={styles.title}>{article.title}</Text>
-                  <Text variant="bodyMedium" style={styles.content}>{article.description}</Text>
+                  <Text style={styles.cardContent}>{article.description}</Text>
                 </Card.Content>
                 {article.urlToImage && (
-                  <Card.Cover source={{ uri: article.urlToImage }} style={styles.cover} />
+                  <Card.Cover source={{ uri: article.urlToImage }} style={styles.coverImage} />
                 )}
                 <Card.Actions>
                   <Button onPress={() => handleReadMore(article.url)} style={styles.actionButton}>Read More</Button>
@@ -147,7 +145,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#ffcc00',
-    
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -188,24 +185,20 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#003366',
   },
   cardSubtitle: {
     fontSize: 14,
     color: '#777777',
   },
-  title: {
-    marginVertical: 8,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#003366',
-  },
-  content: {
+  cardContent: {
     marginBottom: 16,
     fontSize: 16,
     color: '#555555',
   },
-  cover: {
-    marginVertical: 16,
+  coverImage: {
+    marginVertical: 12,
+    height: 200,
     borderRadius: 8,
   },
   actionButton: {

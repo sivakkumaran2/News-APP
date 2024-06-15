@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Linking, Share, RefreshControl } from 'react-native';
-import { Avatar, Button, Card, Text, ActivityIndicator } from 'react-native-paper';
+import { View, Image, StyleSheet, ScrollView, Linking, Share, RefreshControl, ActivityIndicator } from 'react-native';
+import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 const NEWS_API_KEY = 'e4a6185b7ca64927b6fc35015024ef60';
-const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`;
+const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=e4a6185b7ca64927b6fc35015024ef60`;
 
 export default function HomeScreen() {
   const [articles, setArticles] = useState([]);
@@ -52,7 +52,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>News Day</Text>
+        <Text style={styles.headerTitle}>World News</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#ffcc00',
-    
   },
   buttonContainer: {
     flexDirection: 'row',
